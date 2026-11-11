@@ -64,7 +64,7 @@
   }, { passive: true });
 })();
 
-// Local time in Shrewsbury, MA, so visitors in other time zones can plan a call.
+// Local time in the Boston area, so visitors in other time zones can plan a call.
 (function () {
   'use strict';
   var clock = document.getElementById('clock');
