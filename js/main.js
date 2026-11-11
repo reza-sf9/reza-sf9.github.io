@@ -64,6 +64,20 @@
   }, { passive: true });
 })();
 
+// Footer: "Last updated" follows the date the page was last published, and the
+// copyright year follows the current year, so neither needs editing by hand.
+(function () {
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var el = document.getElementById('updated');
+  var d = new Date(document.lastModified);
+  if (el && !isNaN(d.getTime())) {
+    el.textContent = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    el.setAttribute('datetime', d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'));
+  }
+  var year = document.getElementById('copy-year');
+  if (year) year.textContent = String(new Date().getFullYear());
+})();
+
 // Local time in the Boston area, so visitors in other time zones can plan a call.
 (function () {
   'use strict';
