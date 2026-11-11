@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Right answer, wrong reasons: why reasoning quality matters in medical LLMs | Reza Saadati Fard</title>
+  <meta name="description" content="Medical LLMs are judged by their final answers, but clinicians act on the reasoning. What recent papers show about the gap, and how to measure and train for better reasoning.">
+  <meta name="author" content="Reza Saadati Fard">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Right answer, wrong reasons: why reasoning quality matters in medical LLMs">
+  <meta property="og:description" content="What recent papers show about the gap between correct answers and sound clinical reasoning.">
+  <link rel="icon" href="../../assets/favicon-32.png?v=3" sizes="32x32" type="image/png">
+  <link rel="icon" href="../../assets/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;700&family=Atkinson+Hyperlegible+Next:ital,wght@0,300..800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top wrap">
+    <a class="top__name" href="../../index.html">
+      <svg class="top__mark" viewBox="0 0 20 20" aria-hidden="true" shape-rendering="crispEdges"><defs><clipPath id="logo-clip"><rect width="20" height="20" rx="4"/></clipPath></defs><g clip-path="url(#logo-clip)"><rect class="lg-tile" width="20" height="20"/><rect class="lg-hair" x="7" y="1" width="6" height="1"/><rect class="lg-hair" x="5" y="2" width="10" height="1"/><rect class="lg-hair" x="4" y="3" width="4" height="1"/><rect class="lg-hair-hi" x="8" y="3" width="3" height="1"/><rect class="lg-hair" x="11" y="3" width="5" height="1"/><rect class="lg-hair" x="4" y="4" width="13" height="1"/><rect class="lg-hair" x="3" y="5" width="14" height="1"/><rect class="lg-hair" x="3" y="6" width="2" height="1"/><rect class="lg-skin" x="5" y="6" width="9" height="1"/><rect class="lg-hair" x="14" y="6" width="3" height="1"/><rect class="lg-hair" x="3" y="7" width="1" height="1"/><rect class="lg-skin" x="4" y="7" width="12" height="1"/><rect class="lg-hair" x="16" y="7" width="1" height="1"/><rect class="lg-hair" x="3" y="8" width="1" height="1"/><rect class="lg-skin" x="4" y="8" width="1" height="1"/><rect class="lg-hair" x="5" y="8" width="3" height="1"/><rect class="lg-skin" x="8" y="8" width="4" height="1"/><rect class="lg-hair" x="12" y="8" width="3" height="1"/><rect class="lg-skin" x="15" y="8" width="1" height="1"/><rect class="lg-hair" x="16" y="8" width="1" height="1"/><rect class="lg-skin" x="2" y="9" width="16" height="1"/><rect class="lg-skin" x="2" y="10" width="4" height="1"/><rect class="lg-eye" x="6" y="10" width="1" height="1"/><rect class="lg-skin" x="7" y="10" width="6" height="1"/><rect class="lg-eye" x="13" y="10" width="1" height="1"/><rect class="lg-skin" x="14" y="10" width="4" height="1"/><rect class="lg-skin" x="3" y="11" width="3" height="1"/><rect class="lg-eye" x="6" y="11" width="1" height="1"/><rect class="lg-skin" x="7" y="11" width="6" height="1"/><rect class="lg-eye" x="13" y="11" width="1" height="1"/><rect class="lg-skin" x="14" y="11" width="3" height="1"/><rect class="lg-skin" x="3" y="12" width="7" height="1"/><rect class="lg-nose" x="10" y="12" width="1" height="1"/><rect class="lg-skin" x="11" y="12" width="6" height="1"/><rect class="lg-stubble" x="3" y="13" width="1" height="1"/><rect class="lg-skin" x="4" y="13" width="12" height="1"/><rect class="lg-stubble" x="16" y="13" width="1" height="1"/><rect class="lg-stubble" x="4" y="14" width="2" height="1"/><rect class="lg-skin" x="6" y="14" width="2" height="1"/><rect class="lg-mouth" x="8" y="14" width="4" height="1"/><rect class="lg-skin" x="12" y="14" width="2" height="1"/><rect class="lg-stubble" x="14" y="14" width="2" height="1"/><rect class="lg-stubble" x="5" y="15" width="10" height="1"/><rect class="lg-stubble" x="7" y="16" width="6" height="1"/><rect class="lg-skin" x="8" y="17" width="4" height="1"/><rect class="lg-polo" x="4" y="18" width="3" height="1"/><rect class="lg-collar" x="7" y="18" width="2" height="1"/><rect class="lg-button" x="9" y="18" width="2" height="1"/><rect class="lg-collar" x="11" y="18" width="2" height="1"/><rect class="lg-polo" x="13" y="18" width="3" height="1"/><rect class="lg-polo" x="3" y="19" width="6" height="1"/><rect class="lg-button" x="9" y="19" width="1" height="1"/><rect class="lg-polo" x="10" y="19" width="7" height="1"/></g></svg>
+      <span>Reza Saadati Fard</span>
+    </a>
+    <nav class="top__nav" aria-label="Main">
+      <a class="top__keep" href="../../index.html">Home</a>
+      <a class="btn btn--small" href="../../assets/Reza-Saadati-Fard-CV.pdf" download>CV</a>
+      <a class="top__keep top__blog" href="../index.html">Blog</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <article class="article">
+      <header class="article__head">
+        <p class="article__back"><a href="../index.html">All posts</a></p>
+        <h1 class="article__title">Right answer, wrong reasons: why reasoning quality matters in medical LLMs</h1>
+        <p class="article__meta"><time datetime="2026-11-11">November 11, 2026</time><span>5 min read</span></p>
+      </header>
+
+      <div class="prose">
+        <p>Most medical LLM benchmarks still grade one thing: the final answer. Did the model pick the right diagnosis, the right stage, the right drug? But a clinician never acts on a label alone. They act on the reasoning behind it: which findings mattered, which guideline applies, what was ruled out. A model that reaches the right answer for the wrong reasons is a liability waiting for the case where those reasons no longer happen to work.</p>
+        <p>A wave of recent papers puts numbers on this gap. Here is what they show, and what I think it means for anyone building clinical AI.</p>
+
+        <h2>Accuracy hides a lot</h2>
+        <p><strong>Med Evidence Bench</strong>, posted on November 10, 2026, links every grading criterion to a specific span of clinical source text, so a score can be traced back to evidence. Across ten LLMs, the evidence trace score was 0.975 to 0.997 on guideline knowledge, but dropped to 0.182 to 0.447 on real-world laboratory scenarios. In those real cases, models were good at identifying the relevant clinical information (mean 0.770) but poor at matching it to evidence (0.165) and turning it into a recommendation (0.160). The authors put it plainly: guideline recall does not ensure patient-specific evidence use. (The benchmark uses Chinese-language materials, so the exact numbers may not transfer, but the pattern is hard to ignore.)</p>
+        <p><strong>MedCaseReasoning</strong>, from Stanford and collaborators, pairs 14,489 diagnostic cases from published case reports with the reasoning statements clinicians wrote. DeepSeek-R1, the strongest open model they tested, reached 48% diagnostic accuracy and mentioned only 64% of the clinicians' reasoning statements. A model can name the diagnosis while skipping a third of the logic a physician would expect to see.</p>
+
+        <h2>A plausible explanation is not the same as a faithful one</h2>
+        <p>This matters even more for imaging, which is where I spend most of my time. A 2025 study of medical vision-language models on chest X-ray questions tested whether chain-of-thought explanations reflect what actually drives the answer, by injecting text and visual cues and watching how explanations change. The authors found that answer accuracy and explanation quality can be decoupled, that a model acknowledging a cue does not mean its answer is grounded in it, and that text cues moved the explanations more than visual cues did. For a wound or radiology model, an explanation that sounds right but ignores the picture is worse than no explanation at all.</p>
+
+        <h2>We can measure reasoning now</h2>
+        <p>The good news is that reasoning quality is becoming measurable at scale. <strong>MedThink-Bench</strong>, published in npj Digital Medicine, provides 500 hard questions across ten medical domains, each with step-by-step rationales written by medical experts. Its evaluator, which uses an LLM judge that checks model reasoning against those expert steps, correlated with expert ratings at up to 0.87 while taking about 1.4% of the time. It also showed that reasoning scores reorder models: smaller models such as MedGemma-27B beat much larger proprietary ones on some tasks. Leaderboards built on accuracy alone would miss that.</p>
+
+        <h2>And we can train for it</h2>
+        <p>Measuring reasoning is only half the job. <strong>Med-PRM</strong> (EMNLP 2025) trains a process reward model that checks each reasoning step against clinical guidelines and literature retrieved for that step, rather than rewarding only the final answer. It improved base models by up to 13.5% and pushed an 8B model past 80% on MedQA. MedCaseReasoning found something similar from the other direction: fine-tuning on clinician reasoning traces raised diagnostic accuracy and reasoning recall by 29% and 41% on average.</p>
+        <p>This matches what I have seen in my own work. In <a href="https://arxiv.org/abs/2510.24980" rel="noopener">FT-ARM</a>, an agentic reflection loop makes a multimodal model re-check its own pressure ulcer staging before it answers, and it returns a written rationale a clinician can check. In <a href="https://arxiv.org/abs/2604.19937" rel="noopener">Infection-Reasoner</a>, we asked wound experts to grade the model's rationales directly, not just its infection labels. Rewarding the reasoning, step by step, is also the direction of my current work on reinforcement learning for clinical models.</p>
+
+        <h2>What I would ask of any medical LLM</h2>
+        <ul>
+          <li><strong>Report reasoning metrics next to accuracy.</strong> Step-level agreement with expert rationales, not just the final label.</li>
+          <li><strong>Make claims traceable.</strong> Every recommendation should point to the guideline, image region or patient fact it depends on.</li>
+          <li><strong>Test faithfulness, not fluency.</strong> Perturb the inputs and check that the explanation changes when, and only when, the evidence does.</li>
+          <li><strong>Keep clinicians in the loop.</strong> Automated judges scale well, but expert spot checks are what keep them honest.</li>
+        </ul>
+        <p>Accuracy tells us whether a model was right this time. Reasoning quality tells us whether we should trust it next time. In medicine, the second question is the one that matters.</p>
+
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li><a href="https://arxiv.org/abs/2611.13562" rel="noopener">An evidence-traceable benchmark of clinical reasoning in large language models</a> (Med Evidence Bench), arXiv, November 2026</li>
+          <li><a href="https://arxiv.org/abs/2505.11733" rel="noopener">MedCaseReasoning: Evaluating and learning diagnostic reasoning from clinical case reports</a>, Wu et al., arXiv, 2025</li>
+          <li><a href="https://www.nature.com/articles/s41746-025-02208-7" rel="noopener">Automating expert-level medical reasoning evaluation of large language models</a> (MedThink-Bench), npj Digital Medicine, 2025</li>
+          <li><a href="https://arxiv.org/abs/2510.11196" rel="noopener">Evaluating reasoning faithfulness in medical vision-language models using multimodal perturbations</a>, Moll et al., arXiv, 2025</li>
+          <li><a href="https://aclanthology.org/2025.emnlp-main.837/" rel="noopener">Med-PRM: Medical reasoning models with stepwise, guideline-verified process rewards</a>, Yun et al., EMNLP 2025</li>
+          <li><a href="https://arxiv.org/abs/2510.24980" rel="noopener">FT-ARM: Fine-tuned agentic reflection multimodal language model for pressure ulcer severity classification with reasoning</a>, Saadati Fard et al., arXiv, 2025</li>
+          <li><a href="https://arxiv.org/abs/2604.19937" rel="noopener">Infection-Reasoner: A compact vision-language model for wound infection classification with evidence-grounded clinical reasoning</a>, Busaranuvong et al., arXiv, 2026</li>
+        </ul>
+      </div>
+
+      <footer class="article__foot">
+        <p>Written by <a href="../../index.html">Reza Saadati Fard</a>, a healthcare AI researcher working on multimodal models for wound care. Questions or disagreements are welcome at <a href="mailto:saadatifard.reza@gmail.com">saadatifard.reza@gmail.com</a>.</p>
+        <p><a class="btn btn--ghost btn--small" href="../index.html">All posts</a></p>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="foot wrap">
+    <p>© 2026 Reza Saadati Fard</p>
+    <p><a href="../../index.html">Home</a></p>
+  </footer>
+</body>
+</html>

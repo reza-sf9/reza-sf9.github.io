@@ -6,6 +6,13 @@
  */
 window.BLOG_POSTS = [
   {
+    title: 'Right answer, wrong reasons: why reasoning quality matters in medical LLMs',
+    url: 'posts/reasoning-quality-medical-llms.html',
+    date: '2026-11-11',
+    readingTime: '5 min read',
+    summary: 'Medical LLMs are judged by their final answers, but clinicians act on the reasoning. What recent papers show about the gap, and how to measure and train for better reasoning.'
+  },
+  {
     title: 'Jev vs LLMs: when you need a decision, not a paragraph',
     url: 'posts/jev-vs-llms.html',
     date: '2026-10-26',
