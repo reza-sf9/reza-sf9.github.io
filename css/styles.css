@@ -1051,6 +1051,27 @@ a.role__org:hover { color: var(--accent); text-decoration-color: var(--accent); 
   color: var(--ink-2);
 }
 
+.layout .win__text a { color: var(--ink); }
+.layout .win__text a:hover { color: var(--accent); }
+.win__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.9rem 1rem 1rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.win__list li + li { margin-top: 0.75rem; }
+.facts .win__list li { padding-top: 0; border-top: 0; box-shadow: none; }
+.win__list a { color: var(--ink); }
+.win__list a:hover { color: var(--accent); }
+.win__num {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+
 /* timeline */
 .path.win { margin-bottom: 3rem; }
 .path.win .path__scroll { padding: 1rem 1rem 0.4rem; }

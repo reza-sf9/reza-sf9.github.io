@@ -25,7 +25,7 @@
   };
 
   var START_YEAR = 2008;
-  var FINISH_YEAR = 2026.9;
+  var FINISH_YEAR = 2027.2;
   var YEARS_PER_SECOND = 0.42;     // the whole run takes about 45 seconds
   var BANNER_TIME = 1.9;           // seconds a milestone banner stays up
   var BEST_KEY = 'career-run-best';
@@ -47,7 +47,7 @@
     { year: 2024.4, title: "People's Choice Award", sub: 'WPI Graduate Research Innovation Exchange', icon: 'star', burst: true },
     { year: 2025, title: 'Three U.S. patents', sub: 'Wound assessment and organ donor matching', icon: 'bulb', burst: true },
     { year: 2025.5, title: 'Paper at EMNLP', sub: 'Agentic medical knowledge graphs', icon: 'paper', burst: true },
-    { year: 2026.15, sign: 'Centific', title: 'New job: healthcare AI intern', sub: 'Centific', icon: 'case', role: 'Healthcare AI intern, Centific' }
+    { year: 2026.6, sign: 'Centific', title: 'New job: healthcare AI research intern', sub: 'RLHF and agentic AI at Centific', icon: 'case', role: 'Research intern, healthcare AI, Centific' }
   ];
   var TOTAL_MILESTONES = MILESTONES.filter(function (m) { return m.title; }).length;
 
@@ -98,7 +98,7 @@
     { until: 2018.5, items: [{ key: 'iut', name: 'Isfahan University of Technology' }] },
     { until: 2019, items: [{ name: 'Neural signal research' }] },
     { until: 2021.6, items: [{ key: 'orthobiomed', name: 'Ortho BioMed' }] },
-    { until: 2026, items: [{ key: 'wpi', name: 'WPI CareLab' }] },
+    { until: 2026.55, items: [{ key: 'wpi', name: 'WPI CareLab' }] },
     { until: 9999, items: [{ key: 'wpi', name: 'WPI CareLab' }, { key: 'centific', name: 'Centific' }] }
   ];
   // Pixel pictures for backdrops without a logo: drawn large, with a small label.
